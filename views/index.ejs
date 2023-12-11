@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tutor Node</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <style>
+      body {
+        background-color: #f8f9fa;
+      }
+
+      .container {
+        margin-top: 50px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1 class="mb-4"><%= title %></h1>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">NIM</th>
+            <th scope="col">Nama</th>
+            <th scope="col">Kelas</th>
+            <th scope="col">Prodi</th>
+            <th scope="col">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (let user of mahasiswa) { %>
+          <tr>
+            <td><%= user.NIM %></td>
+            <td><%= user.Nama %></td>
+            <td><%= user.Kelas %></td>
+            <td><%= user.Prodi %></td>
+            <td>
+              <form action="/edit/<%= user.NIM %>" method="post" class="mb-2">
+                <input
+                  type="text"
+                  name="Nama"
+                  class="form-control mb-2"
+                  value="<%= user.Nama %>"
+                  placeholder="Nama"
+                />
+                <input
+                  type="text"
+                  name="Kelas"
+                  class="form-control mb-2"
+                  value="<%= user.Kelas %>"
+                  placeholder="Kelas"
+                />
+                <input
+                  type="text"
+                  name="Prodi"
+                  class="form-control mb-2"
+                  value="<%= user.Prodi %>"
+                  placeholder="Prodi"
+                />
+                <button type="submit" class="btn btn-warning">Update</button>
+              </form>
+
+              <form action="/hapus/<%= user.NIM %>" method="post">
+                <button type="submit" class="btn btn-danger">Hapus</button>
+              </form>
+            </td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+
+      <form action="/tambah" method="post">
+        <h3>Menambahkan Data Mahasiswa Baru</h3>
+        <div class="mb-3">
+          <label for="formGroupExampleInput" class="form-label">NIM</label>
+          <input type="text" name="NIM" class="form-control" />
+        </div>
+        <div class="mb-3">
+          <label for="formGroupExampleInput2" class="form-label">Nama</label>
+          <input type="text" name="Nama" class="form-control" />
+        </div>
+        <div class="mb-3">
+          <label for="formGroupExampleInput2" class="form-label">Kelas</label>
+          <input type="text" name="Kelas" class="form-control" />
+        </div>
+        <div class="mb-3">
+          <label for="formGroupExampleInput2" class="form-label">Prodi</label>
+          <input type="text" name="Prodi" class="form-control" />
+        </div>
+        <input type="submit" class="btn btn-danger" value="Tambahkan" />
+      </form>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
